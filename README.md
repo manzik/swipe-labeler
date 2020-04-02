@@ -18,14 +18,14 @@ The server is running. You can navigate to http://<public_ip>:3000 on your touch
 Navigate to the machine's address on the specified port to access the labeler.  
 Once done, the `labels.csv` file will look like this:
 
-| file         | label         |
-| -------------|:-------------:|
-| pet_1.jpg    | cat           |
-| pet_2.jpg    | dog           |
-| pet_3.jpg    | cat           |
-| pet_4.jpg    | dog           |
-| pet_5.jpg    | dog           |
-| ...          | ...           |
+| file          | label         |
+| --------------|:-------------:|
+| pet_01.jpg    | cat           |
+| pet_02.jpg    | dog           |
+| pet_03.jpg    | cat           |
+| pet_04.jpg    | dog           |
+| pet_05.jpg    | dog           |
+| ...           | ...           |
 
 
 #   
