@@ -11,6 +11,7 @@ program
   .requiredOption("-s, --save <filepath>", "File path to save the resulting labels csv file")
   .requiredOption("-ll, --label-left <label>", "Name for left swipe label")
   .requiredOption("-lr, --label-right <label>", "Name for right swipe label")
+  .option("-lu, --label-up <label>", "Name for up swipe label")
   .option("-p, --port <port>", "Port number", "8080");
 
 program.parse(process.argv);
@@ -31,12 +32,12 @@ let validateArgs = (program)=>
   try
   {
     let stats = fs.lstatSync(path.resolve(program.data));
-    if (stats.isDirectory())
+    if (!stats.isDirectory())
       dataPathValid = true;
   }
   catch(e){}
   if(!dataPathValid)
-    return "Path declared in --data argument does not exist or is not a folder";
+    
   
   config = { left: program.labelLeft, right: program.labelRight };
 
