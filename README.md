@@ -5,21 +5,24 @@ It also enables you to label the dateset on your machine remotely using your pho
 <p align="center"><img align="center" src="demo/demo.gif"/></p>  
 
 # Getting started
-You can start by cloning the repository and installing the project's dependencies:
+You can start by installing the package:
+```command
+~$ npm install -g swipe-labeler
+```
+For the purpose of using the sample images provided, you can also clone the repository:
 ```command
 ~$ git clone https://github.com/manzik/swipe-labeler/
-~$ cd swipe-labeler && npm install && cd ..
 ```
 Enter the following command to start a server on port `3000` for labeling the images inside folder `swipe-labeler/sample_pet_images` with classes `cat` for left swipe and `dog` for right swipe, and saving the labeled results in the csv file `labels.csv`:
 ```command
-~$ node swipe-labeler -d swipe-labeler/sample_pet_images/ -s labels.csv --label-left cat --label-right dog -p 3000
+~$ swipe-labeler -d swipe-labeler/sample_pet_images/ -s labels.csv --label-left cat --label-right dog -p 3000
 Labels file doesn't exist, creating the labels file.
 The server is running. You can navigate to http://<public_ip>:3000 on your touch-enabled device or http://localhost:3000 on your machine to access the labeler.
 ```
 
 You can see a full list of commands and options available by entering `node swipe-labeler -h`:
 ```command
-~$ node swipe-labeler -h
+~$ swipe-labeler -h
 Usage: swipe-labeler [options]
 
 Options:
