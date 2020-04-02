@@ -21,16 +21,22 @@ let saveFileExists = false;
 let validateArgs = (program)=>
 {
   let saveFileFolder = path.dirname(program.save);
-  if(!fs.existsSync(saveFileFolder))
+  if(!fs.existsSync(path.resolve(saveFileFolder)))
     return "Folder for the file path declared in --save argument does not exist";
   if(path.basename(program.save).split(".").pop().toLowerCase() != "csv")
     return "Saving file path declared is not of .csv format";
   saveFileExists = fs.existsSync(program.save);
-  if(saveFileExists)
-    console.log("File exists, resuming append");
-
-  if(!fs.existsSync(program.data))
-    return "Folder declared in --data argument does not exist";
+  
+  let dataPathValid = false;
+  try
+  {
+    let stats = fs.lstatSync(path.resolve(program.data));
+    if (stats.isDirectory())
+      dataPathValid = true;
+  }
+  catch(e){}
+  if(!dataPathValid)
+    return "Path declared in --data argument does not exist or is not a folder";
   
   config = { left: program.labelLeft, right: program.labelRight };
 
@@ -42,6 +48,9 @@ let validateArgs = (program)=>
 
   port = parseInt(program.port);
   
+  if(saveFileExists)
+    console.log("File exists, resuming append");
+
   return true;
 }
 
