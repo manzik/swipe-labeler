@@ -38,7 +38,7 @@ Options:
 **\*** By using the same --save (-s) argument when starting the server next time, you can resume the labeling process.  
 
 Navigate to the machine's address on the specified port to access the labeler.  
-Once done, the `labels.csv` file will look like this:
+Every time you label an image, a line for the input label and the corresponding file gets appended to the `labels.csv` file on the go, and it will look like this in the end:
 
 | file          | label         |
 | --------------|:-------------:|
