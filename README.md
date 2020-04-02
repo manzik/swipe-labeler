@@ -1,5 +1,5 @@
 # Swipe Labeler
-Faster and easier dataset labeling for classification tasks by swiping on touch devices.  
+Faster and easier dataset labeling for classification tasks by swiping on touch-enabled devices.  
 <p align="center"><img align="center" src="demo/demo.gif"/></p>  
 
 # Getting started
@@ -14,7 +14,8 @@ Labels file doesn't exist, creating the labels file.
 The server is running. You can navigate to http://<public_ip>:3000 on your touch-enabled device or http://localhost:3000 on your machine to access the labeler.
 ```
 **\*** You can also use `--label-up` argument if you need to label 3 classes.  
-**\*** By using the same --save (-s) argument next time, you can resume the labeling process.
+**\*** By using the same --save (-s) argument next time, you can resume the labeling process.  
+
 Navigate to the machine's address on the specified port to access the labeler.  
 Once done, the `labels.csv` file will look like this:
 
