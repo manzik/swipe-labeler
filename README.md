@@ -20,7 +20,7 @@ Labels file doesn't exist, creating the labels file.
 The server is running. You can navigate to http://<public_ip>:3000 on your touch-enabled device or http://localhost:3000 on your machine to access the labeler.
 ```
 
-You can see a full list of commands and options available by entering `swipe-labeler -h`:
+You can see a full list of options available by entering `swipe-labeler -h`:
 ```command
 ~$ swipe-labeler -h
 Usage: swipe-labeler [options]
