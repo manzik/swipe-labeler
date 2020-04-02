@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use("/", express.static(__dirname + '/public'));
 
 program
   .requiredOption("-d, --data <folderpath>", "Folder path for data to label")
@@ -79,8 +80,6 @@ else
   fs.writeFileSync(program.save, "file,label\n");
 
 let saveStream = fs.createWriteStream(program.save, {flags:'a', AutoClose:true});
-
-app.use(express.static('public'));
 
 app.get('/config', (req, res) => res.send(config));
 
