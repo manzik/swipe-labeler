@@ -1,5 +1,5 @@
 # Swipe Labeler
-Faster and easier dataset labeling for classification tasks by swiping on touch-enabled devices.  
+Easier and more accessible dataset labeling for classification tasks by swiping on touch-enabled devices.  
 It also enables you to label the dateset on your machine remotely using your phone.
 
 <p align="center"><img align="center" src="demo/demo.gif"/></p>  
