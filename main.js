@@ -49,9 +49,6 @@ let validateArgs = (program)=>
     return "Port number passed to the --port argument is not a valid port";
 
   port = parseInt(program.port);
-  
-  if(saveFileExists)
-    console.log("File exists, resuming append");
 
   return true;
 }
@@ -67,6 +64,8 @@ let dataFiles = fs.readdirSync(program.data);
 
 if(saveFileExists)
 {
+  console.log("Labels file exists, resuming labeling.");
+
   let csvContent = fs.readFileSync(program.save).toString();
   let labeledImages = csvContent.split("\n").slice(1).map((line)=>{ return line.split(",")[0]; });
   labeledImages.forEach((labeledImage)=>
@@ -77,7 +76,10 @@ if(saveFileExists)
   });
 }
 else
+{
+  console.log("Labels file doesn't exist, creating the labels file.");
   fs.writeFileSync(program.save, "file,label\n");
+}
 
 let saveStream = fs.createWriteStream(program.save, {flags:'a', AutoClose:true});
 
@@ -103,4 +105,4 @@ app.post('/set-label', (req, res) =>
   res.sendStatus(200);
 });
 
-app.listen(port, () => console.log(`The server is running. You can navigate to http://<public_ip>:${port} on your touch device to access the labeler.`));
+app.listen(port, () => console.log(`The server is running. You can navigate to http://<public_ip>:${port} on your touch-enabled device or http://localhost:${port} on your machine to access the labeler.`));
