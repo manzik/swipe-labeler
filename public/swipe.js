@@ -704,7 +704,8 @@ function stackedCards () {
 	var buttonRight = document.querySelector('.right-action');
 
 	buttonLeft.addEventListener('click', onActionLeft, false);
-	buttonTop.addEventListener('click', onActionTop, false);
+	if(buttonTop)
+		buttonTop.addEventListener('click', onActionTop, false);
 	buttonRight.addEventListener('click', onActionRight, false);
 
 }
