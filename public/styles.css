@@ -196,6 +196,8 @@ body {
     font-weight: 500;
     color: #fff;
     text-transform: capitalize;
+    font-size: 3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .top-action {
