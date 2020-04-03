@@ -1,7 +1,7 @@
 {
   "name": "swipe-labeler",
   "version": "1.0.0",
-  "description": "Label data for classification tasks by swiping on your phone",
+  "description": "Faster and easier dataset labeling for classification tasks by swiping on touch-enabled devices.",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
