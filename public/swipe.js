@@ -663,6 +663,10 @@ function stackedCards () {
 		timeTaken = new Date().getTime() - startTime;
 		
 		touchingElement = false;
+
+		listElNodesWidth = $(".stackedcards-container").width();
+
+		console.log(listElNodesWidth, translateX, timeTaken);
 		
 		if(!(currentPosition >= maxElements)){
 			if(translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)){  //is Top?
@@ -676,14 +680,14 @@ function stackedCards () {
 			} else {
 
 				if(translateX < 0){
-					if(translateX < ((listElNodesWidth / 2) * -1) || (Math.abs(translateX) / timeTaken > velocity)){ // Did It Move To Left?
+					if(translateX < ((listElNodesWidth / 3) * -1) || (Math.abs(translateX) / timeTaken > velocity)){ // Did It Move To Left?
 						onSwipeLeft();
 					} else {
 						backToMiddle();
 					}
 				} else if(translateX > 0) {
 					
-					if (translateX > (listElNodesWidth / 2) && (Math.abs(translateX) / timeTaken > velocity)){ // Did It Move To Right?
+					if (translateX > (listElNodesWidth / 3) || (Math.abs(translateX) / timeTaken > velocity)){ // Did It Move To Right?
 						onSwipeRight();
 					} else {
 						backToMiddle();
