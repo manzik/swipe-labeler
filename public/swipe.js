@@ -665,8 +665,6 @@ function stackedCards () {
 		touchingElement = false;
 
 		listElNodesWidth = $(".stackedcards-container").width();
-
-		console.log(listElNodesWidth, translateX, timeTaken);
 		
 		if(!(currentPosition >= maxElements)){
 			if(translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)){  //is Top?
