@@ -1,8 +1,8 @@
 {
   "name": "swipe-labeler",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Faster and easier dataset labeling for classification tasks by swiping on touch-enabled devices.",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +19,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "swipe-labeler": "main.js"
+    "swipe-labeler": "index.js"
   },
   "homepage": "https://github.com/manzik/swipe-labeler#readme",
   "keywords": [
