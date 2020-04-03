@@ -10,13 +10,13 @@ app.use("/", express.static(__dirname + '/public'));
 program
   .name("swipe-labeler")
   .usage("[options]")
-  .requiredOption("-d, --data <folderpath>", "Folder path for data to label")
-  .requiredOption("-s, --save <filepath>", "File path to save the resulting labels csv file")
-  .requiredOption("-ll, --label-left <label>", "Name for left swipe label")
-  .requiredOption("-lr, --label-right <label>", "Name for right swipe label")
-  .option("-lu, --label-up [label]", "Name for up swipe label")
-  .option("-hc, --hide-class-numbers", "Hide the number of labled and remaining items in client's browser", false)
-  .option("-p, --port <port>", "Port number", "8080");
+  .requiredOption("-d, --data <folderpath>", "folder path for data to label")
+  .requiredOption("-s, --save <filepath>", "file path to save the resulting labels csv file")
+  .option("-p, --port <port>", "Port number", "8080")
+  .requiredOption("-ll, --label-left <label>", "name for left swipe label")
+  .requiredOption("-lr, --label-right <label>", "name for right swipe label")
+  .option("-lu, --label-up [label]", "name for up swipe label")
+  .option("-hc, --hide-class-numbers", "hide the number of labled and remaining items in client's browser", false);
 
 program.parse(process.argv);
 
