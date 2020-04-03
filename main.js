@@ -132,3 +132,5 @@ app.post("/set-label", (req, res) =>
 });
 
 app.listen(port, () => console.log(`The server is running. You can navigate to http://<public_ip>:${port} on your touch-enabled device or http://localhost:${port} on your machine to access the labeler.`));
+
+module.exports = {};
