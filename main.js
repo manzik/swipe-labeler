@@ -8,11 +8,14 @@ app.use(bodyParser.json());
 app.use("/", express.static(__dirname + '/public'));
 
 program
+  .name("swipe-labeler")
+  .usage("[options]")
   .requiredOption("-d, --data <folderpath>", "Folder path for data to label")
   .requiredOption("-s, --save <filepath>", "File path to save the resulting labels csv file")
   .requiredOption("-ll, --label-left <label>", "Name for left swipe label")
   .requiredOption("-lr, --label-right <label>", "Name for right swipe label")
-  .option("-lu, --label-up <label>", "Name for up swipe label")
+  .option("-lu, --label-up [label]", "Name for up swipe label")
+  .option("-hc, --hide-class-numbers", "Hide the number of labled and remaining items in client's browser", false)
   .option("-p, --port <port>", "Port number", "8080");
 
 program.parse(process.argv);
@@ -62,17 +65,30 @@ if(validationResult !== true)
 
 let dataFiles = fs.readdirSync(program.data);
 
+let counts = { "remaining": 0 };
+counts[program.labelLeft] = 0;
+counts[program.labelRight] = 0;
+if(program.labelUp)
+  counts[program.labelUp] = 0
+
 if(saveFileExists)
 {
   console.log("Labels file exists, resuming labeling.");
 
   let csvContent = fs.readFileSync(program.save).toString();
-  let labeledImages = csvContent.split("\n").slice(1).map((line)=>{ return line.split(",")[0]; });
+  let labeledImages = csvContent.split("\n").slice(1).filter((line) => { return line.length; }).map((line) =>
+  { 
+    let lineData = line.split(","); 
+    return { name: lineData[0], label: lineData[1] };
+  });
   labeledImages.forEach((labeledImage)=>
   {
-    let imageInd = dataFiles.indexOf(labeledImage);
+    let imageInd = dataFiles.indexOf(labeledImage.name);
     if(imageInd > -1)
+    {
       dataFiles.splice(imageInd, 1);
+      counts[labeledImage.label]++;
+    }
   });
 }
 else
@@ -80,6 +96,8 @@ else
   console.log("Labels file doesn't exist, creating the labels file.");
   fs.writeFileSync(program.save, "file,label\n");
 }
+
+counts.remaining = dataFiles.length;
 
 let saveStream = fs.createWriteStream(program.save, {flags:'a', AutoClose:true});
 
@@ -94,12 +112,19 @@ app.get('/data/:imageName', (req, res) =>
 app.get('/next-data', (req, res) => 
 {
   let response = {name: dataFiles[0]};
+  if(!program.hideClassNumbers)
+    response.counts = counts;
+
   res.send(response);
 });
 
 app.post('/set-label', (req, res) => 
 {
   let data = req.body;
+
+  counts[data.label]++;
+  counts.remaining--;
+
   saveStream.write([data.name, data.label].join(",") + "\n")
   dataFiles.splice(dataFiles.indexOf(data.name), 1);
   res.sendStatus(200);

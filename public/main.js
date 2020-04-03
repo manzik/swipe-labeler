@@ -7,6 +7,28 @@ function handleAPIErr(err)
 
 currentData = {};
 
+function setCounts(data)
+{
+    if(!data.counts)
+    {
+        $("#classes-numbers").html("");
+        return;
+    }
+
+    let countsPairs = [];
+    countsPairs.push(["Remaining", data.counts.remaining]);
+    for(key in data.counts)
+    {
+        if(key == "remaining")
+            continue;
+        
+        capitilizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+        countsPairs.push([capitilizedKey, data.counts[key]]);
+    }
+    let countsStr = countsPairs.map((pair) => { return pair.join(": "); }).join(", ");
+    $("#classes-numbers").html(countsStr);
+}
+
 function setCurrentDataHTML(data)
 {
     $("#stacked-cards-block").html('<div class="stackedcards-container"></div><div class="stackedcards--animatable stackedcards-overlay top">TOP</div> <div class="stackedcards--animatable stackedcards-overlay right">RIGHT</div> <div class="stackedcards--animatable stackedcards-overlay left">LEFT</div>');
@@ -20,17 +42,23 @@ function getNextData(cb)
 {
     $.get("/next-data", (result)=>
     {
+        currentData = result;
+
+        
         // Everything is labeled
         if(!result.name)
         {
             $(".stackedcards.init").css("opacity", "1")
+            $(".global-actions").css("opacity", "0");
             $("#stacked-cards-block").html("<span>Done labeling!</span>");
             initView();
+            setCounts({});
             return;
         }
+        else
+            setCounts(currentData);
 
-        currentData = result;
-        setCurrentDataHTML(result);
+        setCurrentDataHTML(currentData);
         stackedCards();
     }).fail(handleAPIErr);
 }

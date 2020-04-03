@@ -7,6 +7,24 @@ body {
   padding: 10%;
 }
 
+#classes-numbers
+{
+    text-align: center;
+    width: 100%;
+    display: block;
+    z-index: 1000000000;
+    position: absolute;
+    left: 0px;
+    top: 5%;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+    font-size: 3rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    pointer-events: none;
+    touch-action: none;
+}
+
 #stacked-cards-block > span
 {
     text-align: center;
