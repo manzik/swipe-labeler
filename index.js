@@ -114,6 +114,7 @@ app.get("/data/:fileName", (req, res) =>
 app.get("/next-data", (req, res) => 
 {
   let response = {name: dataFiles[0]};
+  
   if(!program.hideClassNumbers)
     response.counts = counts;
 
@@ -124,11 +125,16 @@ app.post("/set-label", (req, res) =>
 {
   let data = req.body;
 
-  counts[data.label]++;
-  counts.remaining--;
+  labelingFileIndex = dataFiles.indexOf(data.name);
 
-  saveStream.write([data.name, data.label].join(",") + "\n")
-  dataFiles.splice(dataFiles.indexOf(data.name), 1);
+  if(labelingFileIndex != -1)
+  {
+    counts[data.label]++;
+    counts.remaining--;
+
+    saveStream.write([data.name, data.label].join(",") + "\n")
+    dataFiles.splice(labelingFileIndex, 1);
+  }
 
   res.sendStatus(200);
 });

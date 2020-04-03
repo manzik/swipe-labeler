@@ -1,6 +1,6 @@
 {
   "name": "swipe-labeler",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Faster and easier dataset labeling for classification tasks by swiping on touch-enabled devices.",
   "main": "index.js",
   "scripts": {
