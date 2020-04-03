@@ -38,7 +38,7 @@ let validateArgs = (program)=>
   try
   {
     let stats = fs.lstatSync(path.resolve(program.data));
-    if (!stats.isDirectory())
+    if (stats.isDirectory())
       dataPathValid = true;
   }
   catch(e){}
