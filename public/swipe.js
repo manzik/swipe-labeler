@@ -665,11 +665,12 @@ function stackedCards () {
 		touchingElement = false;
 
 		listElNodesWidth = $(".stackedcards-container").width();
+		let elementHeight = $(".stackedcards-container").height();
 		
 		if(!(currentPosition >= maxElements)){
-			if(translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)){  //is Top?
+			if(translateY < (elementHeight * -1) / 3  && translateX > ((listElNodesWidth / 3) * -1) && translateX < (listElNodesWidth / 3)){  //is Top?
 
-				if(translateY < (elementHeight * -1) || (Math.abs(translateY) / timeTaken > velocity)){ // Did It Move To Top?
+				if(translateY < (elementHeight * -1) / 3 || (Math.abs(translateY) / timeTaken > velocity)){ // Did It Move To Top?
 					onSwipeTop();
 				} else {
 					backToMiddle();
