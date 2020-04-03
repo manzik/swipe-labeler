@@ -41,7 +41,7 @@ let validateArgs = (program)=>
   }
   catch(e){}
   if(!dataPathValid)
-    
+    return "Folder declared in --data argument does not exist";
   
   config = { left: program.labelLeft, right: program.labelRight };
 
@@ -103,13 +103,13 @@ let saveStream = fs.createWriteStream(program.save, {flags:'a', AutoClose:true})
 
 app.get('/config', (req, res) => res.send(config));
 
-app.get('/data/:imageName', (req, res) => 
+app.get("/data/:fileName", (req, res) => 
 {
-  let imagePath = path.resolve(path.join(program.data, req.params.imageName));
-  res.sendFile(imagePath);
+  let filePath = path.resolve(path.join(program.data, req.params.fileName));
+  res.sendFile(filePath);
 });
 
-app.get('/next-data', (req, res) => 
+app.get("/next-data", (req, res) => 
 {
   let response = {name: dataFiles[0]};
   if(!program.hideClassNumbers)
@@ -118,7 +118,7 @@ app.get('/next-data', (req, res) =>
   res.send(response);
 });
 
-app.post('/set-label', (req, res) => 
+app.post("/set-label", (req, res) => 
 {
   let data = req.body;
 
@@ -127,6 +127,7 @@ app.post('/set-label', (req, res) =>
 
   saveStream.write([data.name, data.label].join(",") + "\n")
   dataFiles.splice(dataFiles.indexOf(data.name), 1);
+
   res.sendStatus(200);
 });
 
